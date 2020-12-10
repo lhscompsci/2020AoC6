@@ -12,24 +12,42 @@ public class Main {
         int ans = 0;
 
         ArrayList<Integer> nums = new ArrayList<>();
-        Set<String> set = new TreeSet<>();
+        Map<String,Integer> map = new TreeMap<>();
+        int groupCounter = 0;
 
-        while(inf.hasNext()){
+        while(inf.hasNextLine()){
             String line = inf.nextLine();
+            System.out.println(line);
             if(!line.equals("")){
+                groupCounter++;
                 String[] resps = line.split("");
-                set.addAll(Arrays.asList(resps));
+                for(String s:resps){
+                        if(map.containsKey(s))
+                            map.put(s,map.get(s)+1);
+                        else
+                            map.put(s,1);
+                }
+
             }
             else {
-                nums.add(set.size());
-                ans+=set.size();
-                set=new TreeSet<>();
+                int sum = 0;
+                for(String k: map.keySet()){
+                    System.out.println("how many of "+k+": "+map.get(k));
+                if(map.get(k) == groupCounter) {
+                        sum+=1;
+                    }
+                }
+                        nums.add(sum);
+                        ans += sum;
+System.out.println("gc: "+groupCounter +"\nsum: "+sum);
+                map=new TreeMap<>();
+                groupCounter = 0;
             }
         }
 
         
         
         
-        System.out.println(ans);
+        System.out.println("the answer is "+ans);
     }
 }
