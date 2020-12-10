@@ -2,20 +2,29 @@ package com.wtxcompsci;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner inf = new Scanner(new File(("input.dat")));
 
-        long ans = 1L;
+        int ans = 0;
 
-        ArrayList<String> map = new ArrayList<>();
+        ArrayList<Integer> nums = new ArrayList<>();
+        Set<String> set = new TreeSet<>();
 
         while(inf.hasNext()){
-            map.add(inf.nextLine());
+            String line = inf.nextLine();
+            if(!line.equals("")){
+                String[] resps = line.split("");
+                set.addAll(Arrays.asList(resps));
+            }
+            else {
+                nums.add(set.size());
+                ans+=set.size();
+                set=new TreeSet<>();
+            }
         }
 
         
